@@ -1,5 +1,6 @@
-# Descarga bases de datos en formato .csv
-# Ejemplo: Alumnado matriculado por enseñanza
+########## Metodo:
+########## Descarga bases de datos en formato .csv
+########## Ejemplo: Alumnado matriculado por enseñanza
 
 # Cambiar directorio (donde se guardan los datos)
 dir <- "/home/eldani/MEGA/Work/Projects/Ongoing/mefd_stat/datos"
@@ -27,7 +28,7 @@ suf_url <- "_bdsc?nocab=1"
 url <- paste0(base_url, file, suf_url)
 
 # Genera directorio donde guardar los archivos
-dir_full <- file.path(dir, file) 
+dir_full <- file.path(dir, file)
 
 lapply(seq_along(file), function(x) download.file(url = url[[x]], destfile = dir_full[[x]]))
 
