@@ -350,8 +350,8 @@ display: none;
 
 
 <h1 class="title toc-ignore">Descarga de datos de EDUCAbase</h1>
-<h3 class="subtitle">Ilustración: Alumnado matriculado por
-enseñanza</h3>
+<h3 class="subtitle">Ilustración: Enseñanzas Régimen General - Alumnado
+matriculado por enseñanza</h3>
 <h4 class="author"></h4>
 <h4 class="date">Marzo 2024</h4>
 
@@ -405,13 +405,36 @@ myurl &lt;- paste0(base_url, file, suf_url)</code></pre>
 #lapply(seq_along(file), function(x) download.file(myurl = myurl[[x]], destfile = dir_full[[x]]))
 #df &lt;- lapply(dir_full, function(x) read.csv2(myurl(x)))</code></pre>
 </div>
-<div id="lee-los-archivos-.csv-directo-de-la-web" class="section level1">
-<h1>Lee los archivos .csv directo de la web</h1>
-<pre class="r"><code>alumnado &lt;- lapply(myurl, function(x) read.csv2(url(x)))
-names(alumnado) &lt;- file</code></pre>
+<div id="lee-lista-de-archivos-.csv-directo-de-la-web" class="section level1">
+<h1>Lee lista de archivos .csv directo de la web</h1>
+<pre class="r"><code>alumnado &lt;- lapply(myurl, function(x) read.csv2(url(x)))</code></pre>
+</div>
+<div id="nombre-de-dataframes" class="section level1">
+<h1>Nombre de dataframes</h1>
+<pre class="r"><code>(names(alumnado) &lt;- file)</code></pre>
+<pre><code>##  [1] &quot;alumnado_1_01.csv&quot; &quot;alumnado_1_02.csv&quot; &quot;alumnado_2_01.csv&quot;
+##  [4] &quot;alumnado_2_02.csv&quot; &quot;alumnado_2_03.csv&quot; &quot;alumnado_2_04.csv&quot;
+##  [7] &quot;alumnado_3_01.csv&quot; &quot;alumnado_3_02.csv&quot; &quot;alumnado_3_03.csv&quot;
+## [10] &quot;alumnado_3_04.csv&quot; &quot;alumnado_3_05.csv&quot; &quot;alumnado_3_06.csv&quot;
+## [13] &quot;alumnado_4_01.csv&quot; &quot;alumnado_4_02.csv&quot; &quot;alumnado_5_01.csv&quot;
+## [16] &quot;alumnado_5_02.csv&quot; &quot;alumnado_5_03.csv&quot; &quot;alumnado_5_04.csv&quot;
+## [19] &quot;alumnado_5_05.csv&quot; &quot;alumnado_5_06.csv&quot; &quot;alumnado_5_07.csv&quot;
+## [22] &quot;alumnado_6_01.csv&quot; &quot;alumnado_6_02.csv&quot; &quot;alumnado_6_03.csv&quot;
+## [25] &quot;alumnado_6_04.csv&quot; &quot;alumnado_6_05.csv&quot; &quot;alumnado_6_06.csv&quot;
+## [28] &quot;alumnado_6_07.csv&quot; &quot;alumnado_6_08.csv&quot; &quot;alumnado_6_09.csv&quot;
+## [31] &quot;alumnado_6_10.csv&quot; &quot;alumnado_6_11.csv&quot; &quot;alumnado_6_12.csv&quot;
+## [34] &quot;alumnado_6_13.csv&quot; &quot;alumnado_6_14.csv&quot; &quot;alumnado_6_15.csv&quot;
+## [37] &quot;alumnado_6_16.csv&quot; &quot;alumnado_6_17.csv&quot; &quot;alumnado_6_18.csv&quot;
+## [40] &quot;alumnado_7_01.csv&quot; &quot;alumnado_7_02.csv&quot; &quot;alumnado_7_03.csv&quot;
+## [43] &quot;alumnado_7_04.csv&quot; &quot;alumnado_7_05.csv&quot; &quot;alumnado_7_06.csv&quot;</code></pre>
 </div>
 <div id="visualización-de-datos-seleccionados" class="section level1">
 <h1>Visualización de datos seleccionados</h1>
+<p>Selección:</p>
+<p>Alumnado de Enseñanzas de Régimen General por titularidad del centro,
+comunidad autónoma y curso académico.</p>
+<p>TODOS LOS CENTROS</p>
+<p>PROMEDIO CA</p>
 <pre class="r"><code>df &lt;- alumnado[[&quot;alumnado_1_01.csv&quot;]] %&gt;%
       filter(Titularidad.del.centro == &quot;TODOS LOS CENTROS&quot;) %&gt;%
       filter(Comunidad.autónoma != &quot;TOTAL&quot;) %&gt;%

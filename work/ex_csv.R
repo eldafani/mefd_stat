@@ -1,10 +1,10 @@
 #' ---
 #' title: "Descarga de datos de EDUCAbase"
-#' subtitle: "Ilustración: Alumnado matriculado por enseñanza"
+#' subtitle: "Ilustración: Enseñanzas Régimen General - Alumnado matriculado por enseñanza"
 #' author: ""
 #' date: "Marzo 2024"
 #' output:
-#'   html_document
+#'   pdf_document
 #' ---
 #'
 
@@ -45,11 +45,23 @@ myurl <- paste0(base_url, file, suf_url)
 #lapply(seq_along(file), function(x) download.file(myurl = myurl[[x]], destfile = dir_full[[x]]))
 #df <- lapply(dir_full, function(x) read.csv2(myurl(x)))
 
-#' # Lee los archivos .csv directo de la web
+#' # Lee lista de archivos .csv directo de la web
 alumnado <- lapply(myurl, function(x) read.csv2(url(x)))
-names(alumnado) <- file
+
+#' # Nombre de dataframes
+(names(alumnado) <- file)
+
 
 #' # Visualización de datos seleccionados
+#' Selección:
+#'
+#' Alumnado de Enseñanzas de Régimen General por titularidad del centro, comunidad autónoma y curso académico.
+#'
+#' TODOS LOS CENTROS
+#'
+#' PROMEDIO CA
+#'
+
 df <- alumnado[["alumnado_1_01.csv"]] %>%
       filter(Titularidad.del.centro == "TODOS LOS CENTROS") %>%
       filter(Comunidad.autónoma != "TOTAL") %>%
