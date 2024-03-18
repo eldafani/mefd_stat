@@ -1,0 +1,122 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+library(tidyverse)
+library(mefdind)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# mefdind
+
+**mefdind** es un paquete con herramientas para manejar las bases de datos con [indicadores](https://www.educacionyfp.gob.es/servicios-al-ciudadano/estadisticas/no-universitaria.html) del Ministerio de Educación, Formación Profesional y Deportes (MEFD) de Españá. Las funciones permiten leer, descargar, y seleccionar las bases de datos con indicadores.
+
+## Instalación
+Hay dos maneras de instalarlo.
+
+### CRAN
+Una es la versión estable en CRAN:
+
+```{r, eval = FALSE}
+install.packages("mefdind")
+```
+
+### GitHub
+La otra es la versión en desarrollo en GitHub:
+
+```{r, eval = FALSE}
+library("devtools")
+install_github("eldafani/mefdind")
+```
+
+## Nombre de archivos 
+```{r}
+mi_url <-"https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
+mefd_name(mi_url)
+```
+
+## urls de bases de datos 
+```{r}
+mi_url <- "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/sice/series&file=pcaxis&l=s0"
+mefd_url(mi_url)
+```
+
+## Metadatos de indicadores 
+Generar metadata a partir de la web  
+
+```{r}
+mi_url <-"https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
+df <- mefd_meta(mi_url)
+head(df)
+```
+
+Leer metadata general disponible en el paquete 
+```{r}
+head(meta_mefd)
+```
+
+## Leer datos 
+
+### Método 1: Con el vínculo de la web (*url_web*)
+```{r, eval= FALSE}
+df <- mefd_read(url_web = mi_url)
+```
+
+### Método 2: Con el url de la base de datos (*url_ind*)
+Un indicador específico 
+```{r}
+df <- mefd_read(url_ind = meta_mefd$url[190])
+```
+
+Varios indicadores
+```{r}
+df <- mefd_read(url_ind=meta_mefd$url[c(1, 3, 5)])
+```
+
+## Visualización de datos 
+
+Seleccionar indicador
+
+```{r}
+meta_mefd$indicador[16]
+```
+
+Leer y manipular base de datos 
+
+```{r}
+df <- mefd_read(url_ind = meta_mefd$url[16]) %>%
+  filter(Comunidad.autónoma != "TOTAL") %>%
+  mutate(Total = as.numeric(gsub('\\.', '', Total))) %>% # remover puntos
+  group_by(Comunidad.autónoma, Sexo) %>%
+  summarise(Total = mean(Total, na.rm = TRUE))
+```
+
+Gráfico de barras
+
+```{r}
+ggplot(df, aes(x = Total, y = reorder(Comunidad.autónoma, Total))) +
+  geom_bar(stat = "identity") +
+  ylab("") +
+  theme_bw() +
+  facet_wrap(~Sexo) +
+  ggtitle(meta_mefd$indicador[16])
+```
+
+## Descargar datos 
+
+Descargar datos con métodos presentados anteriormente
+
+```{r, eval= FALSE}
+mi_folder <- "\home\datos"
+mefd_down(url_web = mi_url, folder = mi_folder)
+mefd_down(url_ind = meta_mefd$url[190], folder = mi_folder)
+mefd_down(url_ind=meta_mefd$url[c(1, 3, 5)], folder = mi_folder)
+```
+
+
