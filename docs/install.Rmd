@@ -1,0 +1,26 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# Instalación
+Hay dos maneras de instalarlo, la versión estable de CRAN y la versión en desarrollo de GitHub.
+
+### CRAN
+```{r, eval = FALSE}
+install.packages("mefdind")
+```
+
+### GitHub
+```{r, eval = FALSE}
+library("devtools")
+install_github("eldafani/mefdind")
+```

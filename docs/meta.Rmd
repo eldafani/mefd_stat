@@ -1,0 +1,49 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+```{r, warning=FALSE,message=FALSE}
+library(tidyverse)
+library(mefdind)
+```
+
+## *mefd_name*: Nombre de archivos 
+Esta función permite leer el nombre de las bases de datos *.csv* con los indicadores.
+
+```{r}
+mi_url <-"https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
+mefd_name(mi_url)
+```
+
+## *mefd_url*: urls de bases de datos 
+Esta función genera un objeto con los *urls* de las bases de datos *.csv* con los indicadores
+
+```{r}
+mi_url <- "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/sice/series&file=pcaxis&l=s0"
+mefd_url(mi_url)
+```
+
+## *mefd_meta*: Genera metadatos de indicadores 
+La función *mefd_meta* genera una base de metadatos a partir del vínculo de la página web con indicadores (*url_web*).  
+
+```{r}
+mi_url <-"https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
+df <- mefd_meta(url_web = mi_url)
+glimpse(df)
+```
+
+## *meta_mefd*: Base de datos con metadatos 
+Además, el paquete contiene una *data.frame* con los metadatos de todas las series principales, *meta_mefd*. 
+
+```{r}
+head(meta_mefd)
+```
