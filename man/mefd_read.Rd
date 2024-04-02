@@ -22,9 +22,11 @@ url de .csv (url_ind). El usuaRio debe eligir uno de los dos argumentos.
 No es posible elegir ambos.
 }
 \examples{
-\dontrun{
+mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
+"educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
+"centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
+
 # Lectura desde página web (url_web)
-mi_url <- "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
 df <- mefd_read(mi_url)
 
 # Lectura de un indicador específico a partir de url del .csv (url_ind)
@@ -32,5 +34,4 @@ df <- mefd_read(url_ind = meta_mefd$url[190])
 
 # Lectura de varios indicadores a partir del url del .csv (url_ind)
 df <- mefd_read(url_ind=meta_mefd$url[c(1, 5, 17)])
-}
 }

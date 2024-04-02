@@ -19,8 +19,8 @@ Genera vector con urls de bases de datos (.csv) para cada indicador
 a partir de url de la web
 }
 \examples{
-\dontrun{
-mi_url <- "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
+mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
+"educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
+"centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
 mefd_url(mi_url)
-}
 }

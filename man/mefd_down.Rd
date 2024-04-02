@@ -4,7 +4,7 @@
 \alias{mefd_down}
 \title{Descarga datos de indicadores}
 \usage{
-mefd_down(url_ind = NULL, url_web = NULL, folder = getwd(), config = conf)
+mefd_down(url_ind = NULL, url_web = NULL, folder = tempdir(), config = conf)
 }
 \arguments{
 \item{url_ind}{url(s) de la bases de datos (.csv) del indicador}
@@ -24,15 +24,19 @@ url de .csv (url_ind). El usuaRio debe eligir uno de los dos argumentos.
 No es posible elegir ambos.
 }
 \examples{
-\dontrun{
+\donttest{
+mi_folder <- "/home/datos"
+mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
+"educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
+"centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
+
 # Descarga desde página web (url_web)
-mi_url <- "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
-mefd_down(mi_url)
+mefd_down(mi_url, folder = mi_folder)
 
 # Descarga un indicador específico a partir de url del .csv (url_ind)
-mefd_down(url_ind = meta_mefd$url[190])
+mefd_down(url_ind = meta_mefd$url[190], folder = mi_folder)
 
 # Descarga varios indicadores a partir del url del .csv (url_ind)
-mefd_down(url_ind=meta_mefd$url[c(1, 5, 17)])
+mefd_down(url_ind=meta_mefd$url[c(1, 5, 17)], folder = mi_folder)
 }
 }

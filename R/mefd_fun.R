@@ -11,10 +11,10 @@
 #' @importFrom stringr str_match
 #'
 #' @examples
-#' \dontrun{
-#' mi_url <- "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
-#' mefd_meta(mi_url)
-#' }
+#' mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
+#' "educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
+#' "centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
+#' mi_meta <- mefd_meta(mi_url)
 mefd_meta <- function(url_web, config = conf) {
 
 pg <- read_html(url_web)
@@ -69,11 +69,10 @@ return(df)
 #' @importFrom stringr str_match
 #'
 #' @examples
-#' \dontrun{
-#' mi_url <- "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
+#' mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
+#' "educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
+#' "centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
 #' mefd_name(mi_url)
-#' }
-
 mefd_name <- function(url_web, config = conf) {
 
 ### Lee atributos 'href'(ruta de la tabla)
@@ -105,10 +104,10 @@ mefd_name <- function(url_web, config = conf) {
 #' @importFrom stringr str_match
 #'
 #' @examples
-#' \dontrun{
-#' mi_url <- "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
+#' mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
+#' "educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
+#' "centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
 #' mefd_url(mi_url)
-#' }
 mefd_url <- function(url_web, config = conf) {
 
 ### Lee atributos 'href'(ruta de la tabla)
@@ -148,9 +147,11 @@ mefd_url <- function(url_web, config = conf) {
 #' @importFrom utils read.csv2
 #'
 #' @examples
-#' \dontrun{
+#' mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
+#' "educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
+#' "centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
+#'
 #' # Lectura desde página web (url_web)
-#' mi_url <- "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
 #' df <- mefd_read(mi_url)
 #'
 #' # Lectura de un indicador específico a partir de url del .csv (url_ind)
@@ -158,7 +159,6 @@ mefd_url <- function(url_web, config = conf) {
 #'
 #' # Lectura de varios indicadores a partir del url del .csv (url_ind)
 #' df <- mefd_read(url_ind=meta_mefd$url[c(1, 5, 17)])
-#' }
 mefd_read <- function(url_ind = NULL, url_web = NULL, config = conf) {
 
 ### Error si indican ambos argumentos
@@ -203,18 +203,22 @@ mefd_read <- function(url_ind = NULL, url_web = NULL, config = conf) {
 #' @importFrom utils read.csv2 download.file
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' mi_folder <- "/home/datos"
+#' mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
+#' "educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
+#' "centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
+#'
 #' # Descarga desde página web (url_web)
-#' mi_url <- "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
-#' mefd_down(mi_url)
+#' mefd_down(mi_url, folder = mi_folder)
 #'
 #' # Descarga un indicador específico a partir de url del .csv (url_ind)
-#' mefd_down(url_ind = meta_mefd$url[190])
+#' mefd_down(url_ind = meta_mefd$url[190], folder = mi_folder)
 #'
 #' # Descarga varios indicadores a partir del url del .csv (url_ind)
-#' mefd_down(url_ind=meta_mefd$url[c(1, 5, 17)])
+#' mefd_down(url_ind=meta_mefd$url[c(1, 5, 17)], folder = mi_folder)
 #' }
-mefd_down <- function(url_ind = NULL, url_web = NULL, folder = getwd(), config = conf) {
+mefd_down <- function(url_ind = NULL, url_web = NULL, folder = tempdir(), config = conf) {
 
   ### Error si indican ambos argumentos
   if(all(!is.null(url_web), !is.null(url_ind))) {

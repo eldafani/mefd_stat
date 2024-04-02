@@ -19,8 +19,8 @@ Genera metadata para indicadores a partir de url del MEFD: nombre de archivos,
 urls de archivos, nombre del indicador
 }
 \examples{
-\dontrun{
-mi_url <- "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
-mefd_meta(mi_url)
-}
+mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
+"educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
+"centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
+mi_meta <- mefd_meta(mi_url)
 }
