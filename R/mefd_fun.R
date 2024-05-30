@@ -169,20 +169,24 @@ mefd_read <- function(idserie = NULL, url_ind = NULL, url_web = NULL, config = c
 
 ### Lee datos con idserie
   if(!is.null(idserie)) {
+    mimeta <- meta_mefd[meta_mefd$idserie %in% idserie, ]
     if(length(idserie)==1) {
-      df <- read.csv2(url(meta_mefd$url[meta_mefd$idserie %in% idserie]))
-    } else
-      df <- lapply(meta_mefd$url[meta_mefd$idserie %in% idserie],
-      function(x) read.csv2(url(x)))
-      return(df)
-  }
+      df <- cbind(read.csv2(url(mimeta$url)), indicador = mimeta$indicador)
+    } else {
+      df <- lapply(1:nrow(mimeta), function(x)
+      cbind(read.csv2(url(mimeta$url[[x]])), indicador =  mimeta$indicador[[x]]))
+      names(df) <- mimeta$idserie
+    }
+    return(df)
+}
 
 ### Lee datos con url de la .csv (sin nombrar)
   if(!is.null(url_ind)) {
     if(length(url_ind)==1) {
     df <- read.csv2(url(url_ind))
-    } else
+    } else {
     df <- lapply(url_ind, function(x) read.csv2(url(x)))
+    }
     return(df)
   }
 
@@ -238,14 +242,14 @@ mefd_down <- function(idserie = NULL, url_ind = NULL, url_web = NULL, folder = t
 
 ### Lee datos con idserie
   if(!is.null(idserie)) {
+    mimeta <- meta_mefd[meta_mefd$idserie %in% idserie, ]
     if(length(idserie)==1) {
-      df <- download.file(url = meta_mefd$url[meta_mefd$idserie %in% idserie],
-                          destfile = file.path(folder, "datos.csv"))
-    } else
-      misurl <- meta_mefd$url[meta_mefd$idserie %in% idserie]
-      df <- lapply(seq_along(misurl), function(x) download.file(url = misurl[[x]],
-      destfile = file.path(folder, paste("datos_", x, ".csv"))))
-      return(df)
+    df <- download.file(url = mimeta$url,
+          destfile = file.path(folder, paste0(mimeta$idserie, ".csv")))
+    } else {
+    df <- lapply(1:nrow(mimeta), function(x) download.file(url = mimeta$url[[x]],
+          destfile = file.path(folder, paste0(mimeta$idserie[[x]], ".csv"))))
+    }
   }
 
   ### Lee datos con url de la .csv (sin nombrar)
