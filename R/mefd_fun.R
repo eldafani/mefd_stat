@@ -243,3 +243,27 @@ mefd_down <- function(url_ind = NULL, url_web = NULL, folder = tempdir(), config
     destfile = file.path(folder, name_vec[[x]])))
   }
 }
+
+#' Buscador de indicadores
+#' @export
+#' @description
+#' Busca en archivo metadatos el nombre de indicadores que contienen una palabra
+#'
+#' @param value palabra a buscar en la lista de indicadores
+#' @param config lista con parámetros de configuración (default)
+#' @return data.frame con el nombre y idserie de los indicadores
+#'
+#' @examples
+#' # Indicadores que contienen la palabra "idoneidad"
+#' mefd_search("idoneidad")
+#' # Indicadores que contienen la palabra "primaria"
+#' mefd_search("primaria")
+#' # Indicadores que contienen las palabra "primaria" y "sexo
+#' mefd_search("primaria.*sexo")
+#' # Indicadores que contienen las palabra "extranjero" o "idoneidad"
+#' mefd_search("extranjero|idoneidad")
+mefd_search <- function(value, config = conf) {
+  index <- grep(toupper(value), toupper(meta_mefd$indicador))
+  output <- meta_mefd[index, c("idserie", "indicador")]
+  return(output)
+}
