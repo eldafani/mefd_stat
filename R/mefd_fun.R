@@ -134,10 +134,10 @@ mefd_url <- function(url_web, config = conf) {
 #' Lee datos de indicadores
 #' @export
 #' @description
-#' Lee bases de datos (.csv) de indicadores a partir de página web (url_web) O
-#' url de .csv (url_ind). El usuaRio debe eligir uno de los dos argumentos.
-#' No es posible elegir ambos.
+#' Lee bases de datos (.csv) de indicadores a partir de id de la serie (idserie),
+#' página web (url_web) o url de .csv (url_ind). El usuaRio debe eligir solo un método.
 #'
+#' @param idserie id de la serie en el archivo de metadatos (meta_mefd)
 #' @param url_ind url(s) de la bases de datos (.csv) del indicador
 #' @param url_web url de página web del MEFD con lista de indicadores
 #' @param config lista con parámetros de configuración (default)
@@ -159,12 +159,22 @@ mefd_url <- function(url_web, config = conf) {
 #'
 #' # Lectura de varios indicadores a partir del url del .csv (url_ind)
 #' df <- mefd_read(url_ind=meta_mefd$url[c(1, 5, 17)])
-mefd_read <- function(url_ind = NULL, url_web = NULL, config = conf) {
+mefd_read <- function(idserie = NULL, url_ind = NULL, url_web = NULL, config = conf) {
 
-### Error si indican ambos argumentos
-  if(all(!is.null(url_web), !is.null(url_ind))) {
-    message("You can't supply both 'url_ind' and 'url_web' at the same time")
+### Error si indican más de un método o ninguno
+  if(sum(!sapply(list(idserie, url_ind, url_web), is.null)) != 1) {
+    message("You need to supply one argument only: 'idserie', 'url_ind', or 'url_web'")
     return(NULL)
+  }
+
+### Lee datos con idserie
+  if(!is.null(idserie)) {
+    if(length(idserie)==1) {
+      df <- read.csv2(url(meta_mefd$url[meta_mefd$idserie %in% idserie]))
+    } else
+      df <- lapply(meta_mefd$url[meta_mefd$idserie %in% idserie],
+      function(x) read.csv2(url(x)))
+      return(df)
   }
 
 ### Lee datos con url de la .csv (sin nombrar)
@@ -189,10 +199,10 @@ mefd_read <- function(url_ind = NULL, url_web = NULL, config = conf) {
 #' Descarga datos de indicadores
 #' @export
 #' @description
-#' Descarga bases de datos (.csv) de indicadores a partir de página web (url_web) O
-#' url de .csv (url_ind). El usuaRio debe eligir uno de los dos argumentos.
-#' No es posible elegir ambos.
+#' Descarga bases de datos (.csv) de indicadores a partir de id de la serie (idserie),
+#' página web (url_web) o url de .csv (url_ind). El usuaRio debe eligir solo un método.
 #'
+#' @param idserie id de la serie en el archivo de metadatos (meta_mefd)
 #' @param url_ind url(s) de la bases de datos (.csv) del indicador
 #' @param url_web url de página web del MEFD con lista de indicadores
 #' @param folder directorio donde guardar los datos
@@ -218,12 +228,24 @@ mefd_read <- function(url_ind = NULL, url_web = NULL, config = conf) {
 #' # Descarga varios indicadores a partir del url del .csv (url_ind)
 #' mefd_down(url_ind=meta_mefd$url[c(1, 5, 17)], folder = mi_folder)
 #' }
-mefd_down <- function(url_ind = NULL, url_web = NULL, folder = tempdir(), config = conf) {
+mefd_down <- function(idserie = NULL, url_ind = NULL, url_web = NULL, folder = tempdir(), config = conf) {
 
-  ### Error si indican ambos argumentos
-  if(all(!is.null(url_web), !is.null(url_ind))) {
-    message("You can't supply both 'url_ind' and 'url_web' at the same time")
+### Error si indican más de un método o ninguno
+  if(sum(!sapply(list(idserie, url_ind, url_web), is.null)) != 1) {
+    message("You need to supply one argument only: 'idserie', 'url_ind', or 'url_web'")
     return(NULL)
+  }
+
+### Lee datos con idserie
+  if(!is.null(idserie)) {
+    if(length(idserie)==1) {
+      df <- download.file(url = meta_mefd$url[meta_mefd$idserie %in% idserie],
+                          destfile = file.path(folder, "datos.csv"))
+    } else
+      misurl <- meta_mefd$url[meta_mefd$idserie %in% idserie]
+      df <- lapply(seq_along(misurl), function(x) download.file(url = misurl[[x]],
+      destfile = file.path(folder, paste("datos_", x, ".csv"))))
+      return(df)
   }
 
   ### Lee datos con url de la .csv (sin nombrar)
@@ -242,4 +264,28 @@ mefd_down <- function(url_ind = NULL, url_web = NULL, folder = tempdir(), config
     df <- lapply(seq_along(url_vec), function(x) download.file(url = url_vec[[x]],
     destfile = file.path(folder, name_vec[[x]])))
   }
+}
+
+#' Buscador de indicadores
+#' @export
+#' @description
+#' Busca en archivo metadatos el nombre de indicadores que contienen una palabra
+#'
+#' @param value palabra a buscar en la lista de indicadores
+#' @param config lista con parámetros de configuración (default)
+#' @return data.frame con el nombre y idserie de los indicadores
+#'
+#' @examples
+#' # Indicadores que contienen la palabra "idoneidad"
+#' mefd_search("idoneidad")
+#' # Indicadores que contienen la palabra "primaria"
+#' mefd_search("primaria")
+#' # Indicadores que contienen las palabra "primaria" y "sexo
+#' mefd_search("primaria.*sexo")
+#' # Indicadores que contienen las palabra "extranjero" o "idoneidad"
+#' mefd_search("extranjero|idoneidad")
+mefd_search <- function(value, config = conf) {
+  index <- grep(toupper(value), toupper(meta_mefd$indicador))
+  output <- meta_mefd[index, c("idserie", "indicador")]
+  return(output)
 }

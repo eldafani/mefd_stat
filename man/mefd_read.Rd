@@ -4,9 +4,11 @@
 \alias{mefd_read}
 \title{Lee datos de indicadores}
 \usage{
-mefd_read(url_ind = NULL, url_web = NULL, config = conf)
+mefd_read(idserie = NULL, url_ind = NULL, url_web = NULL, config = conf)
 }
 \arguments{
+\item{idserie}{id de la serie en el archivo de metadatos (meta_mefd)}
+
 \item{url_ind}{url(s) de la bases de datos (.csv) del indicador}
 
 \item{url_web}{url de página web del MEFD con lista de indicadores}
@@ -17,9 +19,8 @@ mefd_read(url_ind = NULL, url_web = NULL, config = conf)
 data.frame o lista de data.frames con datos de indicadores
 }
 \description{
-Lee bases de datos (.csv) de indicadores a partir de página web (url_web) O
-url de .csv (url_ind). El usuaRio debe eligir uno de los dos argumentos.
-No es posible elegir ambos.
+Lee bases de datos (.csv) de indicadores a partir de id de la serie (idserie),
+página web (url_web) o url de .csv (url_ind). El usuaRio debe eligir solo un método.
 }
 \examples{
 mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
