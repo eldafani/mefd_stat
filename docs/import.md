@@ -2,11 +2,14 @@
 # *mefd_read*: Leer datos
 
 La función *mefd_read* importa las bases de datos con indicadores en R.
-Hay dos formas de leer los datos. El primero es con el argumento
+Hay tres métodos diferentes para leer los datos. El primero es con el
+argumento *idserie*, donde se indica el id del indicador, previamente
+idenficado en los metadatos, *meta_mefd*. El segundo es con el argumento
 *url_web*, donde se indica el vínculo de la web del MEFD donde están
-depositados las series principales. El segundo es con el argumento
+depositados las series principales. El tercero es con el argumento
 *url_ind*, el cual contiene uno o más *urls* asociados a las bases de
-datos en formato *.csv* con los indicadores.
+datos en formato *.csv* con los indicadores. A continuación demostramos
+cada uno de estos métodos.
 
 Comenzamos abriendo las librerías que vamos a necesitar para demostrar
 esta función.
@@ -16,7 +19,24 @@ library(tidyverse)
 library(mefdind)
 ```
 
-## Método 1: Con el vínculo de la web (*url_web*) \[[video](https://youtu.be/pdefiTIX7-I)\]
+## Método 1: Con el id de la serie (*idserie*)
+
+Para implementar este método necesitamos primero saber el id del
+indicador o indicadores que buscamos, por ejemplo, haciendo una búsqueda
+con *meta_search*. Digamos que nos interesa el indicador con id *11109*.
+
+``` r
+df <- mefd_read(idserie = 11109)
+```
+
+En caso nos interesen varios indicadores, debemos incluir el id de la
+siguiente manera.
+
+``` r
+df <- mefd_read(idserie = c(11109, 11125, 37002))
+```
+
+## Método 2: Con el vínculo de la web (*url_web*) \[[video](https://youtu.be/pdefiTIX7-I)\]
 
 En este método, lo primero que hay que hacer es definir un objeto con la
 dirección de la página web que con contiene la lista de indicadores. Por
@@ -46,7 +66,7 @@ names(df)
 #> [17] "series_2_07.csv" "series_2_08.csv" "series_2_09.csv" "series_2_10.csv"
 ```
 
-## Método 2: Con el url de la base de datos (*url_ind*) \[[video](https://youtu.be/_I0iiWYZrqc)\]
+## Método 3: Con el url de la base de datos (*url_ind*) \[[video](https://youtu.be/_I0iiWYZrqc)\]
 
 En este método vamos a poder seleccionar indicadores específicos a
 partir de los metadatos utilizando el argumento *url_ind*. Hay dos
@@ -57,8 +77,9 @@ Una es utilizando los metadatos que son parte de este paquete,
 
 ``` r
 glimpse(meta_mefd)
-#> Rows: 269
-#> Columns: 7
+#> Rows: 271
+#> Columns: 8
+#> Groups: titulo_1, titulo_2, titulo_3 [15]
 #> $ indicador <chr> " Alumnado de Enseñanzas de Régimen General por titularidad …
 #> $ archivo   <chr> "alumnado_1_01.csv", "alumnado_1_02.csv", "alumnado_2_01.csv…
 #> $ url       <chr> "https://estadisticas.educacion.gob.es/EducaJaxiPx/files/_px…
@@ -66,6 +87,7 @@ glimpse(meta_mefd)
 #> $ titulo_1  <chr> "Alumnado matriculado", "Alumnado matriculado", "Alumnado ma…
 #> $ titulo_2  <chr> "Enseñanzas Régimen General", "Enseñanzas Régimen General", …
 #> $ titulo_3  <chr> "Alumnado matriculado por enseñanza", "Alumnado matriculado …
+#> $ idserie   <dbl> 11101, 11102, 11103, 11104, 11105, 11106, 11107, 11108, 1110…
 ```
 
 La columna *indicador* contiene el nombre del indicador y la columna
@@ -151,4 +173,4 @@ ggplot(df, aes(x = Total, y = reorder(Comunidad.autónoma, Total))) +
   ggtitle(meta_mefd$indicador[16])
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />

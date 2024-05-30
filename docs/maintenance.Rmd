@@ -1,0 +1,42 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# *conf* 
+
+La script *conf* contiene parámetros que utilizan otras funciones para leer los datos. 
+
+A continuación presentamos ejemplos. 
+
+```{r, warning=FALSE,message=FALSE}
+library(mefdind)
+```
+
+Podemos buscar indicadores que contengan la palabra "idoneidad"
+```{r}
+mefd_search("idoneidad")
+```
+
+Así podemos buscar indicadores que contengan la palabra "primaria"
+```{r}
+mefd_search("primaria")
+```
+
+También podemos encontrar indicadores que contengan ambas palabras, "primaria" y "sexo"
+```{r}
+mefd_search("primaria.*sexo")
+```
+
+O indicadores que contengan al menos una de las dos palabras siguientes.  
+```{r}
+mefd_search("extranjero|idoneidad")
+```
