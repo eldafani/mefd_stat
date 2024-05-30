@@ -37,8 +37,12 @@ mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
 "educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
 "centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
 
+# Descarga con id de la serie
+mefd_down(idserie = 11109, folder = mi_folder)
+mefd_down(idserie = c(11109, 11125, 37002), folder = mi_folder)
+
 # Descarga desde página web (url_web)
-mefd_down(mi_url, folder = mi_folder)
+mefd_down(url_web = mi_url, folder = mi_folder)
 
 # Descarga un indicador específico a partir de url del .csv (url_ind)
 mefd_down(url_ind = meta_mefd$url[190], folder = mi_folder)

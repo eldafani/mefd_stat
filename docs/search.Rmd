@@ -1,0 +1,42 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# *mefd_search*: Busqueda de indicadores 
+
+La función *mefd_search* permite identificar indicadores a partir de palabras claves. El usuaRio provee la palabra clave y la función busca esta palabra en la lista de indicadores del archivo de meta datos, *meta_mefd*. Como resultado, la función otorga el número íd de la serie, *idserie*, que puede utilizarse poisteriormente para leer los datos con la función *mefd_read*.
+
+A continuación presentamos ejemplos. 
+
+```{r, warning=FALSE,message=FALSE}
+library(mefdind)
+```
+
+Podemos buscar indicadores que contengan la palabra "idoneidad"
+```{r}
+mefd_search("idoneidad")
+```
+
+Así podemos buscar indicadores que contengan la palabra "primaria"
+```{r}
+mefd_search("primaria")
+```
+
+También podemos encontrar indicadores que contengan ambas palabras, "primaria" y "sexo"
+```{r}
+mefd_search("primaria.*sexo")
+```
+
+O indicadores que contengan al menos una de las dos palabras siguientes.  
+```{r}
+mefd_search("extranjero|idoneidad")
+```

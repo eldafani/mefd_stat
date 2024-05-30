@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 
 # *mefd_read*: Leer datos 
 
-La función *mefd_read* importa las bases de datos con indicadores en R. Hay dos formas de leer los datos. El primero es con el argumento *url_web*, donde se indica el vínculo de la web del MEFD donde están depositados las series principales. El segundo es con el argumento *url_ind*, el cual contiene uno o más *urls* asociados a las bases de datos en formato *.csv*  con los indicadores.    
+La función *mefd_read* importa las bases de datos con indicadores en R. Hay tres métodos diferentes para leer los datos. El primero es con el argumento *idserie*, donde se indica el id del indicador, previamente idenficado en los metadatos, *meta_mefd*. El segundo es con el argumento *url_web*, donde se indica el vínculo de la web del MEFD donde están depositados las series principales. El tercero es con el argumento *url_ind*, el cual contiene uno o más *urls* asociados a las bases de datos en formato *.csv*  con los indicadores. A continuación demostramos cada uno de estos métodos.    
 
 Comenzamos abriendo las librerías que vamos a necesitar para demostrar esta función. 
 
@@ -22,7 +22,21 @@ library(tidyverse)
 library(mefdind)
 ```
 
-## Método 1: Con el vínculo de la web (*url_web*) [[video](https://youtu.be/pdefiTIX7-I)]
+## Método 1: Con el id de la serie (*idserie*) 
+
+Para implementar este método necesitamos primero saber el id del indicador o indicadores que buscamos, por ejemplo, haciendo una búsqueda con *meta_search*. Digamos que nos interesa el indicador con id *11109*.  
+
+```{r}
+df <- mefd_read(idserie = 11109)
+```
+
+En caso nos interesen varios indicadores, debemos incluir el id de la siguiente manera.
+
+```{r}
+df <- mefd_read(idserie = c(11109, 11125, 37002))
+```
+
+## Método 2: Con el vínculo de la web (*url_web*) [[video](https://youtu.be/pdefiTIX7-I)]
 
 En este método, lo primero que hay que hacer es definir un objeto con la dirección de la página web que con contiene la lista de indicadores. Por ejemplo,
 
@@ -42,7 +56,7 @@ El nombre que identifica a los indicadores es el mismo al de los archivos *.csv*
 names(df)
 ```
 
-## Método 2: Con el url de la base de datos (*url_ind*) [[video](https://youtu.be/_I0iiWYZrqc)]
+## Método 3: Con el url de la base de datos (*url_ind*) [[video](https://youtu.be/_I0iiWYZrqc)]
 En este método vamos a poder seleccionar indicadores específicos a partir de los metadatos utilizando el argumento *url_ind*. Hay dos maneras de leer los datos con este método.
 
 Una es utilizando los metadatos que son parte de este paquete, *meta_mefd*. 

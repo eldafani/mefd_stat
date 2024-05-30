@@ -27,8 +27,12 @@ mi_url <- paste0("https://estadisticas.educacion.gob.es/EducaDynPx/",
 "educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
 "centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
 
+# Lectura con el id de la serie
+df <- mefd_read(idserie = 11109)
+df <- mefd_read(idserie = c(11109, 11125, 37002))
+
 # Lectura desde página web (url_web)
-df <- mefd_read(mi_url)
+df <- mefd_read(url_web = mi_url)
 
 # Lectura de un indicador específico a partir de url del .csv (url_ind)
 df <- mefd_read(url_ind = meta_mefd$url[190])

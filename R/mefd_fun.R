@@ -151,8 +151,12 @@ mefd_url <- function(url_web, config = conf) {
 #' "educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
 #' "centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
 #'
+#' # Lectura con el id de la serie
+#' df <- mefd_read(idserie = 11109)
+#' df <- mefd_read(idserie = c(11109, 11125, 37002))
+#'
 #' # Lectura desde página web (url_web)
-#' df <- mefd_read(mi_url)
+#' df <- mefd_read(url_web = mi_url)
 #'
 #' # Lectura de un indicador específico a partir de url del .csv (url_ind)
 #' df <- mefd_read(url_ind = meta_mefd$url[190])
@@ -223,8 +227,12 @@ mefd_read <- function(idserie = NULL, url_ind = NULL, url_web = NULL, config = c
 #' "educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/",
 #' "centrosyunid/series/unidades_esc&file=pcaxis&l=s0")
 #'
+#' # Descarga con id de la serie
+#' mefd_down(idserie = 11109, folder = mi_folder)
+#' mefd_down(idserie = c(11109, 11125, 37002), folder = mi_folder)
+#'
 #' # Descarga desde página web (url_web)
-#' mefd_down(mi_url, folder = mi_folder)
+#' mefd_down(url_web = mi_url, folder = mi_folder)
 #'
 #' # Descarga un indicador específico a partir de url del .csv (url_ind)
 #' mefd_down(url_ind = meta_mefd$url[190], folder = mi_folder)
