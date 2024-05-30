@@ -11,32 +11,37 @@ knitr::opts_chunk$set(
 )
 ```
 
-# *conf* 
-
-La script *conf* contiene parámetros que utilizan otras funciones para leer los datos. 
-
-A continuación presentamos ejemplos. 
-
 ```{r, warning=FALSE,message=FALSE}
 library(mefdind)
+library(tidyverse)
 ```
 
-Podemos buscar indicadores que contengan la palabra "idoneidad"
+# ¿Cómo expandir la base de meta datos? 
+
+La base de meta datos, *meta_mefd* se genera implementando la función *mefd_meta* a la base *par_url*. Para expandir la base de meta datos es necesario modificar *par_url*.
+
 ```{r}
-mefd_search("idoneidad")
+glimpse(par_url)
 ```
 
-Así podemos buscar indicadores que contengan la palabra "primaria"
-```{r}
-mefd_search("primaria")
+Entonces, si hay una página web nueva con indicadores, podenmos agregarla así. 
+
+```{r, eval =  FALSE}
+par_url <- par_url %>% add_row(url = "mi url nuevo")
 ```
 
-También podemos encontrar indicadores que contengan ambas palabras, "primaria" y "sexo"
-```{r}
-mefd_search("primaria.*sexo")
+Y luego podemos volver a generar el archivo con los meta datos  
+```{r, eval= FALSE}
+meta_list <- lapply(par_url$url, mefd_meta)
+meta_mefd <- do.call(bind_rows, meta_list)
 ```
 
-O indicadores que contengan al menos una de las dos palabras siguientes.  
-```{r}
-mefd_search("extranjero|idoneidad")
+# ¿Cómo cambiar la página web principal? 
+
+La página web principal es *https://estadisticas.educacion.gob.es/*. Este y otros parámetros pueden ser modificados en el script *conf.R*. Por ejemplo, la página web principal puede cambiarse así.
+
+```{r, eval =  FALSE}
+conf$url_1 <- "https://estadisticas.educacion.indicadores.gob.es/"
 ```
+
+Las funciones para generar meta datos y leer datos utilizan este nuevo argumento. 
