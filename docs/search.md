@@ -4,9 +4,9 @@
 La función *mefd_search* permite identificar indicadores a partir de
 palabras claves. El usuaRio provee la palabra clave y la función busca
 esta palabra en la lista de indicadores del archivo de meta datos,
-*meta_mefd*. Como resultado, la función otorga el número íd de la serie,
-*idserie*, que puede utilizarse poisteriormente para leer los datos con
-la función *mefd_read*.
+*meta_mefd*. Como resultado, la función otorga el id de la serie,
+*idserie*, que puede utilizarse posteriormente para leer los datos con
+la función [*mefd_read*](import.md).
 
 A continuación presentamos ejemplos.
 
@@ -14,7 +14,7 @@ A continuación presentamos ejemplos.
 library(mefdind)
 ```
 
-Podemos buscar indicadores que contengan la palabra “idoneidad”
+Buscamos indicadores que contengan la palabra “idoneidad”:
 
 ``` r
 mefd_search("idoneidad")
@@ -32,76 +32,13 @@ mefd_search("idoneidad")
 #> 97  Tasas de idoneidad en la edad de 15 años por sexo, comunidad autónoma y curso académico.
 ```
 
-Así podemos buscar indicadores que contengan la palabra “primaria”
+Como resultado obtenemos el nombre de los indicadores y el *idserie*,
+que nos permite identificarlos.
 
-``` r
-mefd_search("primaria")
-#>     idserie
-#> 7     11107
-#> 8     11108
-#> 50    11203
-#> 61    11303
-#> 149   13606
-#> 197   25901
-#> 198   25902
-#> 199   25903
-#> 200   25904
-#> 201   25905
-#> 202   25906
-#> 203   25907
-#> 204   25908
-#> 205   25909
-#> 206   25910
-#> 207   25911
-#> 208   25912
-#> 241   49304
-#> 251   49314
-#>                                                                                                                                                  indicador
-#> 7                                                 Alumnado de E. Primaria/EGB de 1º a 6º por titularidad del centro, comunidad autónoma y curso académico.
-#> 8                                                                   Alumnado de E. Primaria/EGB de 1º a 6º por sexo, comunidad autónoma y curso académico.
-#> 50                                     Porcentaje de alumnado matriculado en centros públicos. E. Primaria/E.G.B por comunidad autónoma y curso académico.
-#> 61                                         Porcentaje de mujeres en el alumnado matriculado. E. Primaria / E.G.B por comunidad autónoma y curso académico.
-#> 149                                        Alumnado extranjero en Educación Primaria/EGB por titularidad del centro, comunidad autónoma y curso académico.
-#> 197                                 Porcentaje de alumnado de primero de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-#> 198  Porcentaje de alumnado de primero de Educación Primaria que promociona por titularidad/financiación del centro, comunidad autónoma y curso académico.
-#> 199                                 Porcentaje de alumnado de segundo de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-#> 200  Porcentaje de alumnado de segundo de Educación Primaria que promociona por titularidad/financiación del centro, comunidad autónoma y curso académico.
-#> 201                                 Porcentaje de alumnado de tercero de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-#> 202  Porcentaje de alumnado de tercero de Educación Primaria que promociona por titularidad/financiación del centro, comunidad autónoma y curso académico.
-#> 203                                  Porcentaje de alumnado de cuarto de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-#> 204   Porcentaje de alumnado de cuarto de Educación Primaria que promociona por titularidad/financiación del centro, comunidad autónoma y curso académico.
-#> 205                                  Porcentaje de alumnado de quinto de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-#> 206   Porcentaje de alumnado de quinto de Educación Primaria que promociona por titularidad/financiación del centro, comunidad autónoma y curso académico.
-#> 207                                   Porcentaje de alumnado de sexto de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-#> 208    Porcentaje de alumnado de sexto de Educación Primaria que promociona por titularidad/financiación del centro, comunidad autónoma y curso académico.
-#> 241                                                              Unidades de E. Primaria por titularidad del centro, comunidad autónoma y curso académico.
-#> 251                      Número medio de alumnado por unidad en E. Primaria por titularidad/financiación del centro, comunidad autónoma y curso académico.
-```
+También podemos buscar indicadores que contengan varias palabras.
 
-También podemos encontrar indicadores que contengan ambas palabras,
-“primaria” y “sexo”
-
-``` r
-mefd_search("primaria.*sexo")
-#>     idserie
-#> 8     11108
-#> 197   25901
-#> 199   25903
-#> 201   25905
-#> 203   25907
-#> 205   25909
-#> 207   25911
-#>                                                                                                                   indicador
-#> 8                                    Alumnado de E. Primaria/EGB de 1º a 6º por sexo, comunidad autónoma y curso académico.
-#> 197  Porcentaje de alumnado de primero de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-#> 199  Porcentaje de alumnado de segundo de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-#> 201  Porcentaje de alumnado de tercero de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-#> 203   Porcentaje de alumnado de cuarto de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-#> 205   Porcentaje de alumnado de quinto de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-#> 207    Porcentaje de alumnado de sexto de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
-```
-
-O indicadores que contengan al menos una de las dos palabras siguientes.
+Por ejemplo, indicadores que contienen la palabra “extranjero” O
+“idoneidad”.
 
 ``` r
 mefd_search("extranjero|idoneidad")
@@ -159,4 +96,26 @@ mefd_search("extranjero|idoneidad")
 #> 162                                                                                 Alumnado extranjero de Asia por sexo, comunidad autónoma y curso académico.
 #> 163                                                                              Alumnado extranjero de Oceanía por sexo, comunidad autónoma y curso académico.
 #> 164                                                                     Alumnado extranjero de país no definido por sexo, comunidad autónoma y curso académico.
+```
+
+O indicadores que contengan ambas palabras, “primaria” Y “sexo”
+
+``` r
+mefd_search("primaria.*sexo")
+#>     idserie
+#> 8     11108
+#> 197   25901
+#> 199   25903
+#> 201   25905
+#> 203   25907
+#> 205   25909
+#> 207   25911
+#>                                                                                                                   indicador
+#> 8                                    Alumnado de E. Primaria/EGB de 1º a 6º por sexo, comunidad autónoma y curso académico.
+#> 197  Porcentaje de alumnado de primero de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
+#> 199  Porcentaje de alumnado de segundo de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
+#> 201  Porcentaje de alumnado de tercero de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
+#> 203   Porcentaje de alumnado de cuarto de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
+#> 205   Porcentaje de alumnado de quinto de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
+#> 207    Porcentaje de alumnado de sexto de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
 ```

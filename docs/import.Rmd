@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 
 # *mefd_read*: Leer datos 
 
-La función *mefd_read* importa las bases de datos con indicadores en R. Hay tres métodos diferentes para leer los datos. El primero es con el argumento *idserie*, donde se indica el id del indicador, previamente idenficado en los metadatos, *meta_mefd*. El segundo es con el argumento *url_web*, donde se indica el vínculo de la web del MEFD donde están depositados las series principales. El tercero es con el argumento *url_ind*, el cual contiene uno o más *urls* asociados a las bases de datos en formato *.csv*  con los indicadores. A continuación demostramos cada uno de estos métodos.    
+La función *mefd_read* importa bases de datos con indicadores en R. Hay tres métodos para leer los datos. El primero es con el argumento *idserie*, el cual contiene el id del indicador, previamente idenficado en la base de metadatos, *meta_mefd*, o con la función [meta_search](search.md) . El segundo es con el argumento *url_web*, donde se indica la página web del MEFD que contiene las series principales. El tercero es con el argumento *url_ind*, el cual contiene uno o más *urls* con los datos en formato *.csv*. A continuación demostramos cada uno de estos métodos.    
 
 Comenzamos abriendo las librerías que vamos a necesitar para demostrar esta función. 
 
@@ -24,13 +24,41 @@ library(mefdind)
 
 ## Método 1: Con el id de la serie (*idserie*) 
 
-Para implementar este método necesitamos primero saber el id del indicador o indicadores que buscamos, por ejemplo, haciendo una búsqueda con *meta_search*. Digamos que nos interesa el indicador con id *11109*.  
+Para implementar este método necesitamos saber primero el id del indicador o indicadores que buscamos en la base de metadatos *meta_mefd*. Para ello podemos hacer una búsqueda con [meta_search](search.md). 
+
+Digamos que nos interesa el indicador con id *11109*.    
+
+```{r}
+meta_mefd %>% filter(idserie == 11109) %>% select(indicador)
+```
+
+Así podemos descargar los datos.
 
 ```{r}
 df <- mefd_read(idserie = 11109)
 ```
 
-En caso nos interesen varios indicadores, debemos incluir el id de la siguiente manera.
+La data frame *df* contiene los datos del indicador.
+
+```{r}
+head(df)
+```
+
+También es posible leer varios indicadores al mismo tiempo. Por ejemplo, podemos identificar primero los indicadores con una palabra clave.
+
+```{r}
+(mi_id <- mefd_search("idoneidad"))
+```
+
+Y luego leer los datos insertando el id de la serie, *mi_id$idserie*, en el argumento *idserie*:
+
+```{r}
+df <- mefd_read(idserie = mi_id$idserie)
+```
+
+En este caso, *df* es una con data frames para cada indicador.  
+
+También podemos leer indicadores específicos de la siguiente manera. 
 
 ```{r}
 df <- mefd_read(idserie = c(11109, 11125, 37002))

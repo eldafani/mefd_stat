@@ -8,10 +8,10 @@ del Ministerio de Educación, Formación Profesional y Deportes (MEFD) de
 Españá. Las funciones permiten leer, descargar, y seleccionar las bases
 de datos con indicadores.
 
-- [**Instalación**](install.md)
-- [**Busqueda de indicadores**](search.md)
-- [**Leer datos**](import.md)
-- [**Descargar datos**](save.md)
-- [**Metadatos**](meta.md)
+- [Instalación](install.md)
+- [*mefd_search*: Buscar indicadores](search.md)
+- [*mefd_read*: Leer datos](import.md)
+- [*mefd_down*: Descargar datos](save.md)
+- [Metadatos](meta.md)
 
-Tener en cuenta para el [**mantenimiento**](maintenance.md).
+Tener en cuenta para el [mantenimiento](maintenance.md).
