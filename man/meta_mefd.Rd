@@ -5,7 +5,7 @@
 \alias{meta_mefd}
 \title{meta_mefd}
 \format{
-An object of class \code{grouped_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 271 rows and 8 columns.
+An object of class \code{data.frame} with 271 rows and 8 columns.
 }
 \usage{
 meta_mefd
