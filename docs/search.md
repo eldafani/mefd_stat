@@ -1,5 +1,5 @@
 
-# *mefd_search*: Busqueda de indicadores
+# *mefd_search*: Buscar indicadores
 
 La función *mefd_search* permite identificar indicadores a partir de
 palabras claves. El usuaRio provee la palabra clave y la función busca

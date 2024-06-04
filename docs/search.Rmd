@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# *mefd_search*: Busqueda de indicadores 
+# *mefd_search*: Buscar indicadores 
 
 La función *mefd_search* permite identificar indicadores a partir de palabras claves. El usuaRio provee la palabra clave y la función busca esta palabra en la lista de indicadores del archivo de meta datos, *meta_mefd*. Como resultado, la función otorga el id de la serie, *idserie*, que puede utilizarse posteriormente para leer los datos con la función [*mefd_read*](import.md).
 

@@ -42,7 +42,7 @@ glimpse(df)
 ```
 
 ## *meta_mefd*: Base de datos con metadatos 
-Además, el paquete contiene una *data.frame* con los metadatos de todas las series principales, *meta_mefd*. 
+Además, el paquete contiene una data frame con los metadatos de todas las series principales, *meta_mefd*. 
 
 ```{r}
 head(meta_mefd)

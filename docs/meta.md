@@ -62,7 +62,7 @@ glimpse(df)
 
 ## *meta_mefd*: Base de datos con metadatos
 
-Además, el paquete contiene una *data.frame* con los metadatos de todas
+Además, el paquete contiene una data frame con los metadatos de todas
 las series principales, *meta_mefd*.
 
 ``` r
@@ -102,11 +102,11 @@ head(meta_mefd)
 #> 4 Alumnado matriculado Enseñanzas Régimen General
 #> 5 Alumnado matriculado Enseñanzas Régimen General
 #> 6 Alumnado matriculado Enseñanzas Régimen General
-#>                             titulo_3
-#> 1 Alumnado matriculado por enseñanza
-#> 2 Alumnado matriculado por enseñanza
-#> 3 Alumnado matriculado por enseñanza
-#> 4 Alumnado matriculado por enseñanza
-#> 5 Alumnado matriculado por enseñanza
-#> 6 Alumnado matriculado por enseñanza
+#>                             titulo_3 idserie
+#> 1 Alumnado matriculado por enseñanza   11101
+#> 2 Alumnado matriculado por enseñanza   11102
+#> 3 Alumnado matriculado por enseñanza   11103
+#> 4 Alumnado matriculado por enseñanza   11104
+#> 5 Alumnado matriculado por enseñanza   11105
+#> 6 Alumnado matriculado por enseñanza   11106
 ```

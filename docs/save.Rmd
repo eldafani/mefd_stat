@@ -13,30 +13,33 @@ knitr::opts_chunk$set(
 
 # *mefd_down*: Descargar datos 
 
-La función *mefd_down* permite descargar los datos en formato *.csv* a un directorio en el ordenador. Al igual que la función *mefd_read* para leer datos, la descarga puede hacerse con dos métodos, usando el vínculo de la página web (*url_web*) o el url del archivo o archivos específicos con los datos del indicador (*url_ind*).
-
-A continuación presentamos ejemplos con ambos métodos.
+La función *mefd_down* permite descargar los datos en formato *.csv* a un directorio en el ordenador. Al igual que la función *mefd_read* para leer datos, la descarga puede hacerse con tres métodos, suministrando el id de la serie (*idserie*), el vínculo de la página web (*url_web*) o el url del archivo o archivos *.csv* específicos con los datos del indicador (*url_ind*).
 
 ```{r, warning=FALSE,message=FALSE}
 library(mefdind)
 ```
 
-Luego de abrir la librería debemos crear un objeto con la ruta del directorio donde queremos descargar los dats. Por ejemplo,
+Primero debemos crear un objeto con la ruta del directorio donde queremos descargar los datos. Por ejemplo,
 
 ```{r, eval= FALSE}
 mi_folder <- "\home\datos"
 ```
 
-Podemos descargar todos los datos de una página web indicando el *url_web*. 
+Para descargar datos con *idserie*, hacemos:
+
+```{r, eval= FALSE}
+mefd_down(idserie = c(11109, 11125, 37002), folder = mi_folder)
+```
+
+Para descargar datos con *url_web*: 
 
 ```{r, eval= FALSE}
 mi_url <-"https://estadisticas.educacion.gob.es/EducaDynPx/educabase/index.htm?type=pcaxis&path=/no-universitaria/centros/centrosyunid/series/unidades_esc&file=pcaxis&l=s0"
 mefd_down(url_web = mi_url, folder = mi_folder)
 ```
 
-O podemos seleccionar y descargar indicadores específicos a partir de los metadatos.
+Para descargar datos con *url_ind*: 
 
 ```{r, eval= FALSE}
-mefd_down(url_ind = meta_mefd$url[190], folder = mi_folder)
 mefd_down(url_ind=meta_mefd$url[c(1, 3, 5)], folder = mi_folder)
 ```
