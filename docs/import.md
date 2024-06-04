@@ -5,7 +5,7 @@ La función *mefd_read* importa bases de datos con indicadores en R. Hay
 tres métodos para leer los datos. El primero es con el argumento
 *idserie*, el cual contiene el id del indicador, previamente idenficado
 en la base de metadatos, *meta_mefd*, o con la función
-[meta_search](search.md) . El segundo es con el argumento *url_web*,
+[mefd_search](search.md) . El segundo es con el argumento *url_web*,
 donde se indica la página web del MEFD que contiene las series
 principales. El tercero es con el argumento *url_ind*, el cual contiene
 uno o más *urls* con los datos en formato *.csv*. A continuación
@@ -88,7 +88,7 @@ en el argumento *idserie*:
 df <- mefd_read(idserie = mi_id$idserie)
 ```
 
-En este caso, *df* es una con data frames para cada indicador.
+En este caso, *df* es una lista con data frames para cada indicador.
 
 También podemos leer indicadores específicos de la siguiente manera.
 
@@ -143,21 +143,42 @@ df_meta <- mefd_meta(url_web = mi_url)
 El objeto *df_meta* contiene los metadatos.
 
 ``` r
-glimpse(df_meta)
-#> Rows: 11
-#> Columns: 4
-#> $ indicador <chr> " Porcentaje de alumnado matriculado en centros públicos. To…
-#> $ archivo   <chr> "general_01.csv", "general_02.csv", "general_03.csv", "gener…
-#> $ url       <chr> "https://estadisticas.educacion.gob.es/EducaJaxiPx/files/_px…
-#> $ titulo    <chr> "ENSEÑANZAS NO UNIVERSITARIAS / ALUMNADO MATRICULADO", "ENSE…
+head(df_meta)
+#>                                                                                                                                indicador
+#> 1  Porcentaje de alumnado matriculado en centros públicos. Total Enseñanzas de Régimen General por comunidad autónoma y curso académico.
+#> 2    Porcentaje de alumnado matriculado en centros públicos, por ciclo. E. Infantil/Preescolar por comunidad autónoma y curso académico.
+#> 3                    Porcentaje de alumnado matriculado en centros públicos. E. Primaria/E.G.B por comunidad autónoma y curso académico.
+#> 4                                  Porcentaje de alumnado matriculado en centros públicos. ESO por comunidad autónoma y curso académico.
+#> 5         Porcentaje de alumnado matriculado en centros públicos, por enseñanza. Bachilleratos por comunidad autónoma y curso académico.
+#> 6   Porcentaje de alumnado matriculado en centros públicos, por grado. Ciclos Formativos de FP por comunidad autónoma y curso académico.
+#>          archivo
+#> 1 general_01.csv
+#> 2 general_02.csv
+#> 3 general_03.csv
+#> 4 general_04.csv
+#> 5 general_05.csv
+#> 6 general_06.csv
+#>                                                                                                                                                                  url
+#> 1 https://estadisticas.educacion.gob.es/EducaJaxiPx/files/_px/es/csv_bdsc/no-universitaria/alumnado/matriculado/series/gen-porcen-gen/l0/general_01.csv_bdsc?nocab=1
+#> 2 https://estadisticas.educacion.gob.es/EducaJaxiPx/files/_px/es/csv_bdsc/no-universitaria/alumnado/matriculado/series/gen-porcen-gen/l0/general_02.csv_bdsc?nocab=1
+#> 3 https://estadisticas.educacion.gob.es/EducaJaxiPx/files/_px/es/csv_bdsc/no-universitaria/alumnado/matriculado/series/gen-porcen-gen/l0/general_03.csv_bdsc?nocab=1
+#> 4 https://estadisticas.educacion.gob.es/EducaJaxiPx/files/_px/es/csv_bdsc/no-universitaria/alumnado/matriculado/series/gen-porcen-gen/l0/general_04.csv_bdsc?nocab=1
+#> 5 https://estadisticas.educacion.gob.es/EducaJaxiPx/files/_px/es/csv_bdsc/no-universitaria/alumnado/matriculado/series/gen-porcen-gen/l0/general_05.csv_bdsc?nocab=1
+#> 6 https://estadisticas.educacion.gob.es/EducaJaxiPx/files/_px/es/csv_bdsc/no-universitaria/alumnado/matriculado/series/gen-porcen-gen/l0/general_06.csv_bdsc?nocab=1
+#>                                                titulo
+#> 1 ENSEÑANZAS NO UNIVERSITARIAS / ALUMNADO MATRICULADO
+#> 2 ENSEÑANZAS NO UNIVERSITARIAS / ALUMNADO MATRICULADO
+#> 3 ENSEÑANZAS NO UNIVERSITARIAS / ALUMNADO MATRICULADO
+#> 4 ENSEÑANZAS NO UNIVERSITARIAS / ALUMNADO MATRICULADO
+#> 5 ENSEÑANZAS NO UNIVERSITARIAS / ALUMNADO MATRICULADO
+#> 6 ENSEÑANZAS NO UNIVERSITARIAS / ALUMNADO MATRICULADO
 ```
 
-Luego seleccionamos los indicadores y leemos los datos con *mefd_meta*
-utilizando el argumento *url_ind*. Así sería para los indicadores en las
-filas 3 y 7 de los metadatos:
+Digamos que nos interesan los indicadores en la fila 2 y 5. Así podemos
+leer los datos.
 
 ``` r
-df <- mefd_read(url_ind=df_meta$url[c(3, 7)])
+df <- mefd_read(url_ind=df_meta$url[c(2, 5)])
 ```
 
 ## Visualización de datos

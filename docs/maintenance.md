@@ -6,7 +6,7 @@ library(tidyverse)
 
 # ¿Cómo expandir la base de meta datos?
 
-La base de meta datos, *meta_mefd* se genera implementando la función
+La base de meta datos, *meta_mefd*, se genera implementando la función
 *mefd_meta* a la base *par_url*. Para expandir la base de meta datos es
 necesario modificar *par_url*.
 
@@ -20,11 +20,12 @@ glimpse(par_url)
 #> $ url      <chr> "https://estadisticas.educacion.gob.es/EducaDynPx/educabase/i…
 ```
 
-Entonces, si hay una página web nueva con indicadores, podenmos
-agregarla así.
+Entonces, si hay una página web nueva con indicadores, podemos agregarla
+así.
 
 ``` r
-par_url <- par_url %>% add_row(url = "mi url nuevo")
+par_url <- par_url %>% 
+  add_row(url = "mi url nuevo")
 ```
 
 Y luego podemos volver a generar el archivo con los meta datos

@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 
 # *mefd_read*: Leer datos 
 
-La función *mefd_read* importa bases de datos con indicadores en R. Hay tres métodos para leer los datos. El primero es con el argumento *idserie*, el cual contiene el id del indicador, previamente idenficado en la base de metadatos, *meta_mefd*, o con la función [meta_search](search.md) . El segundo es con el argumento *url_web*, donde se indica la página web del MEFD que contiene las series principales. El tercero es con el argumento *url_ind*, el cual contiene uno o más *urls* con los datos en formato *.csv*. A continuación demostramos cada uno de estos métodos.    
+La función *mefd_read* importa bases de datos con indicadores en R. Hay tres métodos para leer los datos. El primero es con el argumento *idserie*, el cual contiene el id del indicador, previamente idenficado en la base de metadatos, *meta_mefd*, o con la función [mefd_search](search.md) . El segundo es con el argumento *url_web*, donde se indica la página web del MEFD que contiene las series principales. El tercero es con el argumento *url_ind*, el cual contiene uno o más *urls* con los datos en formato *.csv*. A continuación demostramos cada uno de estos métodos.    
 
 Comenzamos abriendo las librerías que vamos a necesitar para demostrar esta función. 
 
@@ -57,7 +57,7 @@ Y luego leemos los datos insertando el id de la serie, *mi_id$idserie*, en el ar
 df <- mefd_read(idserie = mi_id$idserie)
 ```
 
-En este caso, *df* es una con data frames para cada indicador.  
+En este caso, *df* es una lista con data frames para cada indicador.  
 
 También podemos leer indicadores específicos de la siguiente manera. 
 
@@ -98,13 +98,13 @@ df_meta <- mefd_meta(url_web = mi_url)
 El objeto *df_meta* contiene los metadatos. 
 
 ```{r}
-glimpse(df_meta)
+head(df_meta)
 ```
 
-Luego seleccionamos los indicadores y leemos los datos con *mefd_meta* utilizando el argumento *url_ind*. Así sería para los indicadores en las filas 3 y 7 de los metadatos:
+Digamos que nos interesan los indicadores en la fila 2 y 5. Así podemos leer los datos. 
 
 ```{r}
-df <- mefd_read(url_ind=df_meta$url[c(3, 7)])
+df <- mefd_read(url_ind=df_meta$url[c(2, 5)])
 ```
 
 ## Visualización de datos 
