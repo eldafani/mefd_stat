@@ -19,7 +19,7 @@ library(tidyverse)
 library(mefdind)
 ```
 
-## Método 1: Con el id de la serie (*idserie*)
+## Método 1: Con el id de la serie (*idserie*) \[[video](https://youtu.be/jv42mSNRQnA)\]
 
 Para implementar este método necesitamos saber primero el id del
 indicador que nos interesa en la base de metadatos *meta_mefd*.
