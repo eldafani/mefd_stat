@@ -1,4 +1,6 @@
 
+<img src="man/figures/accuee.png" align="right" width="150"/>
+
 # *mefd_search*: Buscar indicadores
 
 La función *mefd_search* permite identificar indicadores a partir de
