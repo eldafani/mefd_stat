@@ -6,10 +6,11 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = "man/figures/",
   out.width = "100%"
 )
 ```
+<img src="man/figures/accuee.png" align="right" width="150"/>
 
 # *mefd_read*: Leer datos 
 

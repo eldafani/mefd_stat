@@ -1,4 +1,6 @@
 
+<img src="man/figures/accuee.png" align="right" width="150"/>
+
 # *mefd_read*: Leer datos
 
 La función *mefd_read* importa bases de datos con indicadores en R. Hay
@@ -218,4 +220,4 @@ ggplot(df, aes(x = Total, y = reorder(Comunidad.autónoma, Total))) +
   ggtitle(meta_mefd$indicador[16])
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+<img src="man/figures/unnamed-chunk-17-1.png" width="100%" />

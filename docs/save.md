@@ -1,4 +1,6 @@
 
+<img src="man/figures/accuee.png" align="right" width="150"/>
+
 # *mefd_down*: Descargar datos
 
 La función *mefd_down* permite descargar los datos en formato *.csv* a

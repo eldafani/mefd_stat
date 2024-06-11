@@ -1,10 +1,14 @@
 
+<img src="man/figures/accuee.png" align="right" width="150"/>
+
+# Mantenimiento
+
 ``` r
 library(mefdind)
 library(tidyverse)
 ```
 
-# ¿Cómo expandir la base de meta datos?
+## ¿Cómo expandir la base de meta datos?
 
 La base de meta datos, *meta_mefd*, se genera implementando la función
 *mefd_meta* a la base *par_url*. Para expandir la base de meta datos es
@@ -35,7 +39,7 @@ meta_list <- lapply(par_url$url, mefd_meta)
 meta_mefd <- do.call(bind_rows, meta_list)
 ```
 
-# ¿Cómo cambiar la página web principal?
+## ¿Cómo cambiar la página web principal?
 
 La página web principal es *<https://estadisticas.educacion.gob.es/>*.
 Este y otros parámetros pueden ser modificados en el script *conf.R*.

@@ -1,12 +1,14 @@
 
-# mefdind: Herramientas para trabajar con indicadores del MEFD
+<img src="man/figures/accuee.png" align="right" width="150"/>
+
+# mefdind: Herramientas para manejo de indicadores
 
 *mefdind* es un paquete con herramientas para manejar las bases de datos
 con
 [indicadores](https://www.educacionyfp.gob.es/servicios-al-ciudadano/estadisticas/no-universitaria.html)
-del Ministerio de Educación, Formación Profesional y Deportes (MEFD) de
-Españá. Las funciones permiten leer, descargar, y seleccionar las bases
-de datos con indicadores.
+del Ministerio de Educación, Formación Profesional y Deportes de Españá.
+Las funciones permiten leer, descargar, y seleccionar las bases de datos
+con indicadores.
 
 - [Instalación](install.md)
 - [*mefd_search*: Buscar indicadores](search.md)

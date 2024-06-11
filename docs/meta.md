@@ -1,4 +1,8 @@
 
+<img src="man/figures/accuee.png" align="right" width="150"/>
+
+# Metadatos
+
 ``` r
 library(tidyverse)
 library(mefdind)

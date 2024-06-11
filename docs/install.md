@@ -1,4 +1,6 @@
 
+<img src="man/figures/accuee.png" align="right" width="150"/>
+
 # Instalación
 
 Hay dos versiones del paquete, la versión estable de
