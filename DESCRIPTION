@@ -1,17 +1,17 @@
 Package: mefdind
 Title: Imports Data from MoE Spain 
-Version: 0.1
+Version: 0.2
 Authors@R: 
     person("Daniel Caro", email = "dcarov@gmail.com", role = c("aut", "cre", "cph"))
 Description: 
-  Imports indicator data provided by the Ministry of Education (MoE),Spain. 
+  Imports indicator data provided by the Ministry of Education, Spain. 
   The data is stored at <https://www.educacionyfp.gob.es/servicios-al-ciudadano/estadisticas/no-universitaria.html>
-  Includes functions for reading, downloading, and selecting data
-  for main series. This package is not sponsored or supported by the MoE Spain.  
-  Importa datos con indicadores del Ministerio de Educación y Formación Profesional (MEFD) de Españá. 
+  Includes functions for reading, downloading, and selecting data for main series. 
+  It is sponsored by ACCUEE <https://www3.gobiernodecanarias.org/educacion/accuee/>.  
+  Importa datos con indicadores del Ministerio de Educación, Españá. 
   Los datos están en <https://www.educacionyfp.gob.es/servicios-al-ciudadano/estadisticas/no-universitaria.html>
-  Contiene funciones para leer, descargar, y seleccionar bases de datos de series principales.
-  Este paquete no es patrocinado o respaldado por el MEFD.  
+  Contiene funciones para leer, descargar, y seleccionar bases de datos de series principales. 
+  Es patrocinado por ACCUEE <https://www3.gobiernodecanarias.org/educacion/accuee/>.  
 License: GPL-2
 Language: es
 URL: https://eldafani.github.io/mefdind/, https://github.com/eldafani/mefdind

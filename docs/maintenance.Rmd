@@ -26,6 +26,7 @@ La base de meta datos, *meta_mefd*, se genera implementando la función *mefd_me
 
 ```{r}
 glimpse(par_url)
+head(par_url)
 ```
 
 Entonces, si hay una página web nueva con indicadores, podemos agregarla así. 
@@ -43,10 +44,17 @@ meta_mefd <- do.call(bind_rows, meta_list)
 
 ## ¿Cómo cambiar la página web principal? 
 
-La página web principal es *https://estadisticas.educacion.gob.es/*. Este y otros parámetros pueden ser modificados en el script *conf.R*. Por ejemplo, la página web principal puede cambiarse así.
+La página web principal es *https://estadisticas.educacion.gob.es/*. Este y otros parámetros pueden ser modificados en el script *conf.R*. 
+
+```{r}
+conf
+```
+
+Por ejemplo, la página web principal puede cambiarse así.
 
 ```{r, eval =  FALSE}
-conf$url_1 <- "https://estadisticas.educacion.indicadores.gob.es/"
+enlace_nuevo <- "https://estadisticas.educacion.indicadores.gob.es/"
+conf$url_1 <- enlace_nuevo
 ```
 
 Las funciones para generar meta datos y leer datos utilizan este nuevo argumento. 
