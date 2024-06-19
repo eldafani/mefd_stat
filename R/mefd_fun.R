@@ -30,22 +30,6 @@ pg_a <- rvest::html_elements(pg, "a")
 tit_ind <- sapply(pg_a, function(x) stringr::str_match(as.character(x), conf$tit_p)[,2])
 tit_ind <- unique(tit_ind[!is.na(tit_ind)])
 
-### Lee atributos 'href'(ruta de la tabla)
-href <- rvest::html_attr(pg_a, "href")
-href <- href[!is.na(href)]
-href <- href[nchar(href)>1]
-href <- grep(conf$tabpx, href, value = TRUE)
-
-### Extrae nombre del archivo .csv
-file <- unique(stringr::str_match(href, conf$file_p)[,2])
-file <- file[!is.na(file)]
-file <- paste0(file, ".csv")
-
-### Genera url para .csv
-url_3 <- paste0(unique(stringr::str_match(href, conf$pre_p)[,2]), "/")
-base_url <- paste0(conf$url_1, conf$url_2, url_3)
-myurl <- paste0(base_url, file, conf$suf_url)
-
 ### Nombre de archivos .csv
 file <- mefd_name(url_web=url_web, config = conf)
 myurl <- mefd_url(url_web=url_web)
