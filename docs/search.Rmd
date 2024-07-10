@@ -40,3 +40,11 @@ O indicadores que contengan ambas palabras, "primaria" Y "sexo"
 ```{r}
 mefd_search("primaria.*sexo")
 ```
+
+Las búsquedas proveen el mismo resultado independientemente de si las palabras claves contienen acentos, mayúsculas o minúsculas. Es decir, da igual si la búsqueda es por *música*, *musica*, o *MUSICA*, por ejemplo.
+
+```{r}
+mefd_search("mÚsica")
+mefd_search("musica")
+mefd_search("MUSICA")
+```
