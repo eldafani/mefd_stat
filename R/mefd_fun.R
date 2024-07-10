@@ -281,7 +281,8 @@ mefd_down <- function(idserie = NULL, url_ind = NULL, url_web = NULL, folder = t
 #' # Indicadores que contienen las palabra "extranjero" o "idoneidad"
 #' mefd_search("extranjero|idoneidad")
 mefd_search <- function(value, config = conf) {
-  index <- grep(toupper(value), toupper(meta_mefd$indicador))
+  index <- grep(iconv(tolower(value), to="ASCII//TRANSLIT"),
+                iconv(tolower(meta_mefd$indicador), to="ASCII//TRANSLIT"))
   output <- meta_mefd[index, c("idserie", "indicador")]
   return(output)
 }
