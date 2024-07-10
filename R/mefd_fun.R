@@ -28,7 +28,7 @@ pg_a <- rvest::html_elements(pg, "a")
 
 ### Titulo de base de datos del indicador
 tit_ind <- sapply(pg_a, function(x) stringr::str_match(as.character(x), conf$tit_p)[,2])
-tit_ind <- unique(tit_ind[!is.na(tit_ind)])
+tit_ind <- tit_ind[!is.na(tit_ind)]
 
 ### Nombre de archivos .csv
 file <- mefd_name(url_web=url_web, config = conf)

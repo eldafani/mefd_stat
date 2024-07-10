@@ -121,3 +121,79 @@ mefd_search("primaria.*sexo")
 #> 205   Porcentaje de alumnado de quinto de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
 #> 207    Porcentaje de alumnado de sexto de Educación Primaria que promociona por sexo, comunidad autónoma y curso académico.
 ```
+
+Las búsquedas proveen el mismo resultado independientemente de si las
+palabras claves contienen acentos, mayúsculas o minúsculas. Es decir, da
+igual si la búsqueda es por *música*, *musica*, o *MUSICA*, por ejemplo.
+
+``` r
+mefd_search("mÚsica")
+#>     idserie
+#> 110   12113
+#> 111   12114
+#> 112   12115
+#> 113   12116
+#> 114   12117
+#> 115   12118
+#> 116   12119
+#> 117   12120
+#> 118   12121
+#> 119   12122
+#>                                                                       indicador
+#> 110       Alumnado de Enseñanzas Regladas de Música por titularidad del centro.
+#> 111                         Alumnado de Enseñanzas Regladas de Música por sexo.
+#> 112    Alumnado de Enseñanzas Elementales de Música por titularidad del centro.
+#> 113                      Alumnado de Enseñanzas Elementales de Música por sexo.
+#> 114  Alumnado de Enseñanzas Profesionales de Música por titularidad del centro.
+#> 115                    Alumnado de Enseñanzas Profesionales de Música por sexo.
+#> 116     Alumnado de Enseñanzas Superiores de Música por titularidad del centro.
+#> 117                       Alumnado de Enseñanzas Superiores de Música por sexo.
+#> 118    Alumnado de Enseñanzas no Regladas de Música por titularidad del centro.
+#> 119                      Alumnado de Enseñanzas no Regladas de Música por sexo.
+mefd_search("musica")
+#>     idserie
+#> 110   12113
+#> 111   12114
+#> 112   12115
+#> 113   12116
+#> 114   12117
+#> 115   12118
+#> 116   12119
+#> 117   12120
+#> 118   12121
+#> 119   12122
+#>                                                                       indicador
+#> 110       Alumnado de Enseñanzas Regladas de Música por titularidad del centro.
+#> 111                         Alumnado de Enseñanzas Regladas de Música por sexo.
+#> 112    Alumnado de Enseñanzas Elementales de Música por titularidad del centro.
+#> 113                      Alumnado de Enseñanzas Elementales de Música por sexo.
+#> 114  Alumnado de Enseñanzas Profesionales de Música por titularidad del centro.
+#> 115                    Alumnado de Enseñanzas Profesionales de Música por sexo.
+#> 116     Alumnado de Enseñanzas Superiores de Música por titularidad del centro.
+#> 117                       Alumnado de Enseñanzas Superiores de Música por sexo.
+#> 118    Alumnado de Enseñanzas no Regladas de Música por titularidad del centro.
+#> 119                      Alumnado de Enseñanzas no Regladas de Música por sexo.
+mefd_search("MUSICA")
+#>     idserie
+#> 110   12113
+#> 111   12114
+#> 112   12115
+#> 113   12116
+#> 114   12117
+#> 115   12118
+#> 116   12119
+#> 117   12120
+#> 118   12121
+#> 119   12122
+#>                                                                       indicador
+#> 110       Alumnado de Enseñanzas Regladas de Música por titularidad del centro.
+#> 111                         Alumnado de Enseñanzas Regladas de Música por sexo.
+#> 112    Alumnado de Enseñanzas Elementales de Música por titularidad del centro.
+#> 113                      Alumnado de Enseñanzas Elementales de Música por sexo.
+#> 114  Alumnado de Enseñanzas Profesionales de Música por titularidad del centro.
+#> 115                    Alumnado de Enseñanzas Profesionales de Música por sexo.
+#> 116     Alumnado de Enseñanzas Superiores de Música por titularidad del centro.
+#> 117                       Alumnado de Enseñanzas Superiores de Música por sexo.
+#> 118    Alumnado de Enseñanzas no Regladas de Música por titularidad del centro.
+#> 119                      Alumnado de Enseñanzas no Regladas de Música por sexo.
+```
